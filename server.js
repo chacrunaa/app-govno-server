@@ -4,6 +4,10 @@ const cors = require("cors");
 const app = express();
 const PORT = 8080;
 
+const logger = createLogger({
+  transports: [new transports.File({ filename: "logs/server.log" })],
+});
+
 app.use(express.json());
 
 app.use((err, req, res, next) => {
@@ -13,15 +17,11 @@ app.use((err, req, res, next) => {
 });
 app.use(cors());
 
-const logger = createLogger({
-  transports: [new transports.File({ filename: "logs/server.log" })],
-});
-
 app.post("/api/button-click", (req, res) => {
   const { buttonId } = req.body;
   const flag = buttonId === 2 ? false : true;
 
-  logger.info();
+  logger.info("Button clicked", { buttonId, flag });
   res.json({ flag });
 });
 
