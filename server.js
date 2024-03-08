@@ -18,6 +18,7 @@ app.use((err, req, res, next) => {
 app.use(cors());
 
 app.post("/api/button-click", (req, res) => {
+  console.log('запрос отработал');
   const { buttonId } = req.body;
   const flag = buttonId === 2 ? false : true;
 
