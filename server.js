@@ -5,7 +5,10 @@ const app = express();
 const PORT = 8080;
 
 const logger = createLogger({
-  transports: [new transports.File({ filename: "logs/server.log" })],
+  transports: [
+    new winston.transports.File({ filename: "error.log", level: "error" }),
+    new winston.transports.File({ filename: "combined.log" }),
+  ],
 });
 
 app.use(express.json());
@@ -18,7 +21,7 @@ app.use((err, req, res, next) => {
 app.use(cors());
 
 app.post("/api/button-click", (req, res) => {
-  console.log('запрос отработал');
+  console.log("запрос отработал");
   const { buttonId } = req.body;
   const flag = buttonId === 2 ? false : true;
 
