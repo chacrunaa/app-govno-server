@@ -14,8 +14,10 @@ const logger = createLogger({
 app.use(express.json());
 
 app.use((err, req, res, next) => {
+  console.log("use app запущен");
   console.error(err.stack);
   logger.error(`Error occurred: ${err.message}`);
+
   res.status(500).send("Internal Server Error");
 });
 app.use(cors());
@@ -24,6 +26,8 @@ app.post("/api/button-click", (req, res) => {
   console.log("запрос отработал");
   const { buttonId } = req.body;
   const flag = buttonId === 2 ? false : true;
+
+  logger.error(res.errored);
 
   logger.info("Button clicked", { buttonId, flag });
   res.json({ flag });
