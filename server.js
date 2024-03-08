@@ -6,8 +6,8 @@ const PORT = 8080;
 
 const logger = createLogger({
   transports: [
-    new winston.transports.File({ filename: "error.log", level: "error" }),
-    new winston.transports.File({ filename: "combined.log" }),
+    new transports.File({ filename: "error.log", level: "error" }),
+    new transports.File({ filename: "combined.log" }),
   ],
 });
 
